@@ -1,0 +1,13 @@
+[Unit]
+Description=my first docker service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f docker-nginx 2> /dev/null || /bin/true"
+ExecStart=/usr/bin/docker run --name docker-nginx -p 80:80 -d nginx
+
+[Install]
+WantedBy=multi-user.target
