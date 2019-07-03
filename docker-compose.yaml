@@ -1,0 +1,17 @@
+version: "3"
+services:
+  stub:
+    build: 
+      context: docker/stub
+  db:
+    build: 
+      context: docker/db
+    environment:
+    - MYSQL_ROOT_PASSWORD=1q2w3e
+  wordpress:
+    image: wordpress:5.2.2-php7.3-fpm
+    ports:
+      - '9000:9000'
+    links:
+      - db
+    restart: always
