@@ -15,3 +15,11 @@ services:
     links:
       - db
     restart: always
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    links: 
+      - wordpress
+    restart: always
+
