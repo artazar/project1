@@ -10,16 +10,26 @@ services:
     - MYSQL_ROOT_PASSWORD=1q2w3e
   wordpress:
     image: wordpress:5.2.2-php7.3-fpm
+    depends_on: 
+      - db
     ports:
       - '9000:9000'
     links:
       - db
     restart: always
+    volumes:
+      - wpdata:/var/www/html
   nginx:
+    depends_on:
+      - wordpress
     image: nginx:latest
     ports:
       - '80:80'
     links: 
       - wordpress
     restart: always
-
+    volumes:
+      - wpdata:/var/www/html
+      - ./docker/nginx:/etc/nginx/conf.d/
+volumes:
+  wpdata:
