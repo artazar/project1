@@ -22,7 +22,8 @@ services:
   nginx:
     depends_on:
       - wordpress
-    image: nginx:latest
+    build:
+      context: docker/nginx
     ports:
       - '80:80'
     links: 
@@ -30,6 +31,5 @@ services:
     restart: always
     volumes:
       - wpdata:/var/www/html
-      - ./docker/nginx:/etc/nginx/conf.d/
 volumes:
   wpdata:
