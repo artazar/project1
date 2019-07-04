@@ -9,4 +9,4 @@ sudo adduser --system --home /home/${USER} --shell /bin/bash --ingroup docker ${
 sudo mkdir -p /home/${USER}/.ssh/
 sudo chown ${USER} /home/${USER}/.ssh
 sudo echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3Xoaz78I7AmvoJkUiydOzifTduCX8Secp0iWokJLBx' >> /home/${USER}/.ssh/authorized_keys
-sudo chown ${USER} home/${USER}/.ssh/authorized_keys
+sudo chown ${USER} /home/${USER}/.ssh/authorized_keys
