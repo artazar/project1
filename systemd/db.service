@@ -1,0 +1,16 @@
+[Unit]
+Description=Project1 MySQL DB Service
+Requires=docker.service
+After=docker.service
+Requires=stub.service
+After=stub.service
+
+[Service]
+Restart=always
+RestartSec=3
+Environment="PWD=1q2w3e"
+ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f project1-db 2> /dev/null || /bin/true"
+ExecStart=/usr/bin/docker run --name project1-db --rm -e MYSQL_ROOT_PASSWORD=${PWD} devops2019summer/db
+
+[Install]
+WantedBy=multi-user.target
