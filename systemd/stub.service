@@ -1,0 +1,13 @@
+[Unit]
+Description=Project1 STUB service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f stub 2> /dev/null || /bin/true"
+ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name project1-stub devops2019summer/stub"
+
+[Install]
+WantedBy=multi-user.target
