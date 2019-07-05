@@ -6,29 +6,26 @@ services:
   db:
     build: 
       context: docker/db
-    environment:
-    - MYSQL_ROOT_PASSWORD=1q2w3e
+    depends_on:
+      - stub
+    network_mode: "service:stub"
   wordpress:
     image: wordpress:5.2.2-php7.3-fpm
     depends_on: 
-      - db
-    ports:
-      - '9000:9000'
-    links:
+      - stub
       - db
     restart: always
+    network_mode: "service:stub"
     volumes:
       - wpdata:/var/www/html
   nginx:
     depends_on:
       - wordpress
+      - stub
     build:
       context: docker/nginx
-    ports:
-      - '80:80'
-    links: 
-      - wordpress
     restart: always
+    network_mode: "service:stub"
     volumes:
       - wpdata:/var/www/html
 volumes:
