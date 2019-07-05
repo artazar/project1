@@ -1,12 +1,12 @@
 #!/bin/bash
 
 function check_port_availability() {
-        docker exec $(docker ps --filter name=$1 -q -a) bash -c "echo > /dev/tcp/127.0.0.1/$2"
+        docker exec $(docker ps --filter name=$1 -q) bash -c "echo > /dev/tcp/127.0.0.1/$2"
         return $?
 }
 
 function check_logs_for_ready_status {
-        docker logs $(docker ps --filter name=$1 -q -a) 2>&1 | grep -m1 "$2" > /dev/null
+        docker logs $(docker ps --filter name=$1 -q) 2>&1 | grep -m1 "$2" > /dev/null
         return $?
 }
 

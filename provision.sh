@@ -25,6 +25,7 @@ install_docker() {
 }
 
 get_services() {
+        echo $(pwd)
 	$sh_c "cp -f ./systemd/stub.service /etc/systemd/system/stub.service"
 	$sh_c "chmod +x /etc/systemd/system/stub.service"
 }
