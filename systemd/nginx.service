@@ -3,12 +3,16 @@
 Description=project1 nginx service
 Requires=docker.service
 After=docker.service
+Requires=stub.service
+After=stub.service
+After=db.service
+After=wordpress.service
 
 [Service]
 Restart=always
 RestartSec=3
 ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f docker-nginx 2> /dev/null || /bin/true"
-ExecStart=/usr/bin/docker run --name project1-nginx -p 80:80 --rm nginx
+ExecStart=/usr/bin/docker run --name project1-nginx --net container:project1-stub --rm devops2019summer/nginx
 
 [Install]
 WantedBy=multi-user.target

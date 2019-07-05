@@ -9,7 +9,7 @@ After=stub.service
 Restart=always
 RestartSec=3
 ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f project1-db 2> /dev/null || /bin/true"
-ExecStart=/usr/bin/docker run --name project1-db --rm devops2019summer/db
+ExecStart=/usr/bin/docker run --name project1-db --net container:project1-stub --rm devops2019summer/db
 
 [Install]
 WantedBy=multi-user.target

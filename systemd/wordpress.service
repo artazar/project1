@@ -3,14 +3,15 @@
 Description=project1 wordpress service
 Requires=docker.service
 After=docker.service
-After=nginx.service
+Requires=stub.service
+After=stub.service
 After=db.service
 
 [Service]
 Restart=always
 RestartSec=3
 ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f project1-wordpress 2> /dev/null || /bin/true"
-ExecStart=/usr/bin/docker run --name project1-wordpress -p 80:80 --rm wordpress:5.2.2-php7.3-fpm
+ExecStart=/usr/bin/docker run --name project1-wordpress --net container:project1-stub --rm wordpress:5.2.2-php7.3-fpm
 
 [Install]
 WantedBy=multi-user.target

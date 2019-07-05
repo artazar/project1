@@ -3,6 +3,8 @@ services:
   stub:
     build: 
       context: docker/stub
+    ports:
+      - "80:80"
   db:
     build: 
       context: docker/db
