@@ -9,6 +9,15 @@ pipeline {
         }
       }
     }
+    stage('Test with docker-compose') {
+      steps {
+        echo 'Running docker-compose'
+        sh 'docker-compose build'
+        sh 'docker-compose up -d'
+        sh './tests/service_integration_test.sh'
+        sh 'docker-compose down'
+      }
+    }
     stage('Test with vagrant') {
       steps {
         echo 'Running vagrant up'
